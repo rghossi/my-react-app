@@ -1,8 +1,9 @@
-import webpack from 'webpack';
-import config from './webpack.config';
-import express from 'express';
-import stormpath from 'express-stormpath';
-import path from 'path';
+'use strict'
+let webpack = require('webpack');
+let config = require('./webpack.config');
+let express = require('express');
+let stormpath = require('express-stormpath');
+let path = require('path');
 
 let app = express();
 let compiler = webpack(config);
