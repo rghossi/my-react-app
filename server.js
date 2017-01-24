@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import config from './webpack.config';
 import express from 'express';
 import stormpath from 'express-stormpath';
+import path from 'path';
 
 let app = express();
 let compiler = webpack(config);
@@ -16,6 +17,14 @@ app.use(stormpath.init(app, {
     produces: ['application/json']
   }
 }));
+
+app.get('/css/bootstrap.min.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build/css/bootstrap.min.css'));
+});
+
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build/index.html'));
+});
 
 app.on('stormpath.ready', function () {
   app.listen(3000, 'localhost', function (err) {
